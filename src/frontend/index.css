@@ -1,0 +1,223 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────────────
+   FONT FACES — self-hosted from /assets/fonts/
+───────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("/assets/fonts/CabinetGrotesk-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque-Variable.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mona Sans";
+  src: url("/assets/fonts/MonaSans-Variable.woff2") format("woff2");
+  font-weight: 200 900;
+  font-display: swap;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   DESIGN TOKENS — Iron Pulse Fitness
+   Dark premium athletic aesthetic
+   Primary accent: electric orange
+───────────────────────────────────────────────────────────── */
+@layer base {
+  :root {
+    --radius: 0.375rem;
+
+    /* Dark theme as default */
+    --background: 0.12 0.005 270;
+    --foreground: 0.96 0.005 85;
+
+    --card: 0.16 0.008 265;
+    --card-foreground: 0.96 0.005 85;
+
+    --popover: 0.18 0.008 265;
+    --popover-foreground: 0.96 0.005 85;
+
+    /* Electric orange primary */
+    --primary: 0.68 0.185 38;
+    --primary-foreground: 0.08 0.005 265;
+
+    --secondary: 0.22 0.01 265;
+    --secondary-foreground: 0.88 0.005 85;
+
+    --muted: 0.20 0.008 265;
+    --muted-foreground: 0.60 0.01 85;
+
+    --accent: 0.68 0.185 38;
+    --accent-foreground: 0.08 0.005 265;
+
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    --border: 0.28 0.01 265;
+    --input: 0.24 0.01 265;
+    --ring: 0.68 0.185 38;
+
+    /* Chart colors */
+    --chart-1: 0.68 0.185 38;
+    --chart-2: 0.75 0.12 190;
+    --chart-3: 0.65 0.18 145;
+    --chart-4: 0.72 0.15 280;
+    --chart-5: 0.80 0.12 60;
+
+    /* Sidebar */
+    --sidebar: 0.14 0.006 265;
+    --sidebar-foreground: 0.96 0.005 85;
+    --sidebar-primary: 0.68 0.185 38;
+    --sidebar-primary-foreground: 0.08 0.005 265;
+    --sidebar-accent: 0.22 0.01 265;
+    --sidebar-accent-foreground: 0.88 0.005 85;
+    --sidebar-border: 0.28 0.01 265;
+    --sidebar-ring: 0.68 0.185 38;
+
+    /* Custom Iron Pulse tokens */
+    --orange: 0.68 0.185 38;
+    --orange-bright: 0.72 0.195 40;
+    --orange-dim: 0.55 0.16 38;
+    --surface-1: 0.16 0.008 265;
+    --surface-2: 0.20 0.010 265;
+    --surface-3: 0.24 0.012 265;
+    --text-primary: 0.96 0.005 85;
+    --text-secondary: 0.70 0.010 85;
+    --text-muted: 0.50 0.008 85;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Cabinet Grotesk", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   CUSTOM UTILITIES
+───────────────────────────────────────────────────────────── */
+@layer utilities {
+  .font-display {
+    font-family: "Bricolage Grotesque", sans-serif;
+  }
+
+  .font-body {
+    font-family: "Cabinet Grotesk", sans-serif;
+  }
+
+  .text-orange {
+    color: oklch(var(--orange));
+  }
+
+  .bg-orange {
+    background-color: oklch(var(--orange));
+  }
+
+  .border-orange {
+    border-color: oklch(var(--orange));
+  }
+
+  .bg-surface-1 {
+    background-color: oklch(var(--surface-1));
+  }
+
+  .bg-surface-2 {
+    background-color: oklch(var(--surface-2));
+  }
+
+  .bg-surface-3 {
+    background-color: oklch(var(--surface-3));
+  }
+
+  .text-muted-iron {
+    color: oklch(var(--text-muted));
+  }
+
+  .text-secondary-iron {
+    color: oklch(var(--text-secondary));
+  }
+
+  /* Noise texture overlay for depth */
+  .noise-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Orange glow effect */
+  .glow-orange {
+    box-shadow: 0 0 30px oklch(0.68 0.185 38 / 0.25), 0 0 60px oklch(0.68 0.185 38 / 0.12);
+  }
+
+  /* Gradient text */
+  .gradient-text-orange {
+    background: linear-gradient(135deg, oklch(0.72 0.195 40), oklch(0.80 0.15 55));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Section reveal animation */
+  .reveal-hidden {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger delays */
+  .stagger-1 { transition-delay: 0.1s; }
+  .stagger-2 { transition-delay: 0.2s; }
+  .stagger-3 { transition-delay: 0.3s; }
+  .stagger-4 { transition-delay: 0.4s; }
+  .stagger-5 { transition-delay: 0.5s; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SCROLL INDICATOR ANIMATION
+───────────────────────────────────────────────────────────── */
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(8px); opacity: 0.4; }
+}
+
+.scroll-indicator {
+  animation: scroll-bounce 1.8s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   PULSE ANIMATION for badge
+───────────────────────────────────────────────────────────── */
+@keyframes pulse-orange {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.68 0.185 38 / 0.4); }
+  50% { box-shadow: 0 0 0 8px oklch(0.68 0.185 38 / 0); }
+}
+
+.pulse-badge {
+  animation: pulse-orange 2s ease-in-out infinite;
+}
